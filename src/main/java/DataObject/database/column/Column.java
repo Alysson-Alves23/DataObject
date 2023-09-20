@@ -4,7 +4,7 @@ import DataObject.database.datatype.Type;
 
 public class Column{
     private String name;
-    private Type type;
+    private String type;
     private boolean primaryKey;
     private boolean notNull;
     private boolean uniqueIndex;
@@ -12,7 +12,13 @@ public class Column{
     private boolean zeroFill;
     private boolean autoIncrement;
     private boolean generatedColumn;
-    public Column(String name, Type type, boolean primaryKey, boolean notNull, boolean uniqueIndex, boolean isBinaryColumn, boolean zeroFill, boolean autoIncrement) {
+
+    public Column (String name, String type){
+        this.name = name;
+        this.type = type;
+
+    }
+    public Column(String name, String type, boolean primaryKey, boolean notNull, boolean uniqueIndex, boolean isBinaryColumn, boolean zeroFill, boolean autoIncrement) {
         this.name = name;
         this.type = type;
         this.primaryKey = primaryKey;
@@ -34,11 +40,11 @@ public class Column{
         this.name = name;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
