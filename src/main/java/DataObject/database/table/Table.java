@@ -7,7 +7,7 @@ import com.google.protobuf.Value;
 import java.sql.SQLException;
 
 
-public class Table {
+public abstract class Table {
     Long _id;
     private String _name;
     private  Column[] _columns;

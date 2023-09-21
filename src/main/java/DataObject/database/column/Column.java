@@ -5,13 +5,13 @@ import DataObject.database.datatype.Type;
 public class Column{
     private String name;
     private String type;
-    private boolean primaryKey;
-    private boolean notNull;
-    private boolean uniqueIndex;
-    private boolean isBinaryColumn;
-    private boolean zeroFill;
-    private boolean autoIncrement;
-    private boolean generatedColumn;
+    private boolean primaryKey = false;
+    private boolean notNull = false;
+    private boolean uniqueIndex = false;
+    private boolean isBinaryColumn = false;
+    private boolean zeroFill = false;
+    private boolean autoIncrement = false;
+    private boolean generatedColumn = false;
 
     public Column (String name, String type){
         this.name = name;

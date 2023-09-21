@@ -1,21 +1,22 @@
 package DataObject.database;
-
-import DataObject.database.column.Column;
 import DataObject.database.datatype.Type;
 import DataObject.database.session.DataBase;
-import DataObject.database.table.Table;
-
-import java.sql.SQLException;
+import DataObject.database.table.Model;
+import DataObject.database.notations.Column;
 
 public class Main {
     public static void main(String[] args) {
         DataBase db = new DataBase("root", "", "jdbc:mysql://localhost:3306/dataobject");
-        Column coluna = new Column("Name","VARCHAR(16)");
-        Column[] colunas = new Column[1];
-        colunas[0] = coluna;
-        Table table = new Table("Teste",colunas,coluna);
-        table.createTable(db);
 
+        new User().create(db);
 
     }
+}
+class User extends Model {
+    @Column(type= Type.BIGINT,primaryKey = true,notNull = true)
+    Long id;
+    @Column(type = Type.VARCHAR,primaryKey = true,notNull = true,size = 21)
+    String name;
+    @Column(type = Type.VARCHAR,primaryKey = true,size = 20)
+    String email;
 }
