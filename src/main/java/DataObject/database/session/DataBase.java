@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DataBase {
+public class DataBase implements ConnectionFactory {
 
     private String user;
     private String password;
@@ -64,4 +64,5 @@ public class DataBase {
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
+
 }

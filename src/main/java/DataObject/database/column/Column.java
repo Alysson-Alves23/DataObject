@@ -4,6 +4,7 @@ import DataObject.database.datatype.Type;
 
 public class Column{
     private String name;
+    public String testName;
     private String type;
     private boolean primaryKey = false;
     private boolean notNull = false;
@@ -12,7 +13,15 @@ public class Column{
     private boolean zeroFill = false;
     private boolean autoIncrement = false;
     private boolean generatedColumn = false;
+    public Column(){
 
+    }
+    private void funcaoTeste(){
+
+    }
+    protected  void funcaoTeste2(){
+
+    }
     public Column (String name, String type){
         this.name = name;
         this.type = type;
@@ -102,6 +111,7 @@ public class Column{
 
     public void setGeneratedColumn(boolean generatedColumn) {
         this.generatedColumn = generatedColumn;
+
     }
 
 

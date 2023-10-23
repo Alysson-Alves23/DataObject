@@ -1,51 +1,18 @@
 package DataObject.database.table;
 
-import DataObject.database.column.Column;
-import DataObject.database.session.DataBase;
-import com.google.protobuf.Value;
-
-import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 
-public abstract class Table {
-    Long _id;
-    private String _name;
-    private  Column[] _columns;
-    private Column _primaryKey;
+public abstract class Table<T> {
+    private  String tableName;
+    private List<T> element;
 
-    public Table( String _name, Column[] _columns, Column _primaryKey) {
-        this._name = _name;
-        this._columns = _columns;
-        this._primaryKey = _primaryKey;
-    }
+    public abstract void create();
+    public abstract void drop();
 
-    public void createTable(DataBase dataBase){
-        dataBase.createConnection();
-        try {
-            String sql = "CREATE TABLE "+_name+"(";
+    public abstract List<T>  findAll(Map<String,String> where);
 
-            for (Column column : _columns) {
-                    sql+="`"+column.getName()+"`"+column.getType()+",";
-            }
-            if(_primaryKey != null){
-                sql+="PRIMARY KEY(`"+_primaryKey.getName()+"`)";
-            }
-            sql+=");";
-            dataBase.getConnection().createStatement().execute(sql);
-            dataBase.closeConnection();
-        } catch (SQLException err) {
-            System.out.println(err);
-        }finally {
-            dataBase.closeConnection();
-        }
-    }
-    void  drop(){
-
-    }
-    int find(String column, String value){
-            int result = 0;
-        return  result;
-    }
-
+    public abstract T findOne(String column,String value);
 
 }
