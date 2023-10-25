@@ -15,4 +15,10 @@ public abstract class Table<T> {
 
     public abstract T findOne(String column,String value);
 
+    public String getTableName() {
+        return tableName;
+    }
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
 }

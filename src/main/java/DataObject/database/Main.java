@@ -1,7 +1,6 @@
 package DataObject.database;
 import DataObject.database.datatype.Type;
 import DataObject.database.session.DataBase;
-import DataObject.database.table.Model;
 import DataObject.database.notations.Column;
 import DataObject.database.table.ViewTable;
 
@@ -13,7 +12,7 @@ public class Main{
     }
 }
 
-class User extends Model {
+class User {
     @Column(type= Type.BIGINT,primaryKey = true,notNull = true)
     Long id;
     @Column(type = Type.VARCHAR,notNull = true,size = 21)
