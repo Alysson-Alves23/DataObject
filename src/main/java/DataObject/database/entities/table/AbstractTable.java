@@ -1,10 +1,10 @@
-package DataObject.database.table;
+package DataObject.database.entities.table;
 
 import java.util.List;
 import java.util.Map;
 
 
-public abstract class Table<T> {
+public abstract class AbstractTable<T> {
     private  String tableName;
     private List<T> element;
 

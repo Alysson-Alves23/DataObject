@@ -3,7 +3,7 @@ import DataObject.database.datatype.Type;
 import DataObject.database.session.DataBase;
 import DataObject.database.table.Model;
 import DataObject.database.notations.Column;
-import DataObject.database.table.ViewTable;
+import DataObject.database.entities.table.ViewTable;
 
 public class Main{
 
