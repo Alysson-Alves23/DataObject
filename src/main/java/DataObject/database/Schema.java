@@ -1,10 +1,8 @@
 package DataObject.database;
-
 import DataObject.database.session.DataBase;
 import DataObject.database.table.Table;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;

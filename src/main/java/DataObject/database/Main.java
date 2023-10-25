@@ -13,7 +13,7 @@ import java.util.Map;
 public class Main{
 
     public static void main(String[] args) {
-        DataBase db = new DataBase("root", "", "jdbc:mysql://127.0.0.1:3306/?user=root");
+        DataBase db = new DataBase("root", "", "");
         db.createConnection();
         Schema s = new Schema();
         try {
