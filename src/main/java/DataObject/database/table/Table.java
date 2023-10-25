@@ -5,6 +5,7 @@ import java.util.Map;
 
 
 public abstract class Table<T> {
+
     private  String tableName;
     private List<T> element;
 

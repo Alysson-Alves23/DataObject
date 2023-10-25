@@ -1,10 +1,25 @@
 package DataObject.database;
+
+import DataObject.database.session.DataBase;
 import DataObject.database.table.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Schema {
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Schema{
+    private String Name;
     private List<Table> tables;
+
+    public String getSchemaName() {
+        return Name;
+    }
+
+    public void setSchemaName(String schemaName) {
+        this.Name = schemaName;
+    }
 
     public Schema() {
         this.tables = new ArrayList<>();
@@ -42,5 +57,12 @@ public class Schema {
         return tables;
     }
 
-
+    public void createSchemaInDatabase(String schemaName, DataBase dataBase) throws SQLException {
+        this.Name = schemaName;
+        Connection connectionDataBase = dataBase.getConnection();
+        Statement statement = connectionDataBase.createStatement();
+        String createSchemaQuery = "CREATE SCHEMA IF NOT EXISTS " + schemaName;
+        statement.executeUpdate(createSchemaQuery);
+        dataBase.closeConnection();
+    }
 }

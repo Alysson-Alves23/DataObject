@@ -2,13 +2,27 @@ package DataObject.database;
 import DataObject.database.datatype.Type;
 import DataObject.database.session.DataBase;
 import DataObject.database.notations.Column;
+import DataObject.database.table.Table;
 import DataObject.database.table.ViewTable;
+import DataObject.database.Schema;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 public class Main{
 
     public static void main(String[] args) {
-       DataBase db = new DataBase("root", "", "jdbc:mysql://localhost:3306/Dataobject");
-
+        DataBase db = new DataBase("root", "", "jdbc:mysql://127.0.0.1:3306/?user=root");
+        db.createConnection();
+        Schema s = new Schema();
+        try {
+            s.createSchemaInDatabase("SchemaTest", db);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(s.getSchemaName());
+        db.closeConnection();
     }
 }
 
