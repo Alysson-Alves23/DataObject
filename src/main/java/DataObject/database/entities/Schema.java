@@ -1,40 +1,41 @@
 package DataObject.database.entities;
+import DataObject.database.datatype.Type;
 import DataObject.database.notations.Column;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.sql.Connection;
 
-public class Schema extends Entity{
+public class Schema extends AbstractEntity {
 
         String name;
         Connection con;
-        Schema(){
+        public Schema(){
             super();
-            this.con = Entity.con;
+            this.con = AbstractEntity.con;
         }
-        Schema(Connection con){
+        public Schema(Connection con){
             super();
             this.con = con;
         };
-        void createTable(){
+        void createTable(Class<?> c){
             Field _primaryKey = null;
             StringBuilder sql = null;
             try {
-                String className = this.getClass().getName().substring(this.getClass().getName().lastIndexOf('.')+1,this.getClass().getName().length());
+                String className = c.getSimpleName();
 
                 sql = new StringBuilder("CREATE TABLE " +className + "(");
 
-                for (Field column: this.getClass().getDeclaredFields()) {
+                for (Field column: c.getDeclaredFields()) {
                     if (!Modifier.isStatic(column.getModifiers()) && !column.isSynthetic()) {
                         System.out.println(column.getName());
                     }
                     Column notation = column.getAnnotation(Column.class);
-                    if(notation !=null){
+                    if(notation != null){
 
                         Integer size = notation.size();
 
                         sql.append("`" + (notation.name().equals("") ? column.getName() : notation.name() )+ "`" + notation.type().name());
-                        if(notation.size() > 0)
+                        if(notation.type().equals(Type.VARCHAR))
                             sql.append("("+notation.size()+")");
                         sql.append(",");
                         if(column.getAnnotation(Column.class).primaryKey()){

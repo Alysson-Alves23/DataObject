@@ -1,19 +1,54 @@
 package DataObject.database.entities;
 
-import DataObject.database.entities.Entity;
+import DataObject.database.notations.Entity;
 import DataObject.database.session.ConnectionFactory;
-import java.lang.reflect.*;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 public class EntityManager {
+    private String packageName;
+    private Schema schema;
 
 
-    static Long entities= Entity.entitieCount;
-    ConnectionFactory cf = null;
-    EntityManager(ConnectionFactory cf){
-        this.cf = cf;
+
+    public EntityManager(Schema schema, String packageName) {
+        this.schema = schema;
+        this.packageName = packageName;
     }
 
-    void load(){
+    List<Class<?>> findByAnnotation() {
+        List<Class<?>> classesWithEntityAnnotation = new ArrayList<>();
 
-    };
 
+        ConfigurationBuilder configuration = new ConfigurationBuilder()
+                .setUrls(ClasspathHelper.forPackage(this.packageName))
+                .setScanners(new SubTypesScanner(), new TypeAnnotationsScanner());
+        Reflections reflections = new Reflections(configuration);
+
+
+        Set<Class<?>> entities = reflections.getTypesAnnotatedWith(Entity.class);
+
+        classesWithEntityAnnotation.addAll(entities);
+
+        return classesWithEntityAnnotation;
+    }
+
+    public void load() {
+        List<Class<?>> classesWithEntityAnnotation = findByAnnotation();
+
+        for (Class<?> c : classesWithEntityAnnotation) {
+           Entity notation = c.getAnnotation(Entity.class);
+
+           if(notation.type().equalsIgnoreCase("TABLE")){
+                schema.createTable(c);
+           }
+        }
+    }
 }
