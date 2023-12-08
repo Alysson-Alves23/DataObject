@@ -3,6 +3,9 @@ package DataObject.database;
 import DataObject.database.datatype.Type;
 import DataObject.database.notations.Column;
 import DataObject.database.notations.Entity;
+import DataObject.database.notations.relationship.ManyToMany;
+
+import java.util.List;
 
 @Entity(type = "Table")
 public class User {
@@ -12,6 +15,9 @@ public class User {
     String name;
     @Column(type = Type.VARCHAR,size = 20)
     String email;
+    @ManyToMany(ref = "Personagem")
+    @Column(type = Type.BIGINT, foreignKey = true)
+    List<Personagem> personagens;
 
     public User(Long id, String name, String email) {
         this.id = id;

@@ -12,7 +12,8 @@ public @interface Column {
     String name() default ""; // Column name in database
     Type type();
     int size() default 0;
-    boolean primaryKey() default false; // If is primaryKey
+    boolean primaryKey() default false;// If is primaryKey
+    boolean foreignKey() default false;// If is primaryKey
     boolean notNull() default false; // its nullable value
     boolean uniqueIndex() default false; // No repeat in table
     boolean isBinaryColumn() default false; //If is Binary value

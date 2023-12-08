@@ -5,14 +5,16 @@ import java.util.Map;
 
 
 public abstract class AbstractTable<T> {
-    private  String tableName;
+    private String tableName;
     private List<T> element;
 
-    public abstract void create();
+    public abstract void insert(T element);
+    public abstract void update(T element);
     public abstract void drop();
+    public abstract T select(String field ,Long value);
+    public abstract T select(String field ,String value);
+    public abstract T select(String field,Double value);
 
-    public abstract List<T>  findAll(Map<String,String> where);
-
-    public abstract T findOne(String column,String value);
+    public abstract void delete(String where);
 
 }
